@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:local_sell/components/alpha.dart';
+import 'package:local_sell/components/constants.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -7,6 +8,7 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: backgroundColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -20,7 +22,7 @@ class MyDrawer extends StatelessWidget {
             ),
           ),
           DrawerTiles(
-              onTap: () {},
+              onTap: ()=> Navigator.pop(context),
               child: const Text(
                 'S H O P',
                 style: TextStyle(color: Colors.black),

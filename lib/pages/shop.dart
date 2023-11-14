@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_sell/components/alpha.dart';
 import 'package:local_sell/components/constants.dart';
 import 'package:local_sell/components/drawer.dart';
+import 'package:local_sell/pages/new_arrivals.dart';
 
 class Shop extends StatelessWidget {
   const Shop({super.key});
@@ -72,30 +73,40 @@ class Shop extends StatelessWidget {
                 style: style2,
               ),
               const Spacer(),
-              const Row(
-                children: [
-                  Text(
-                    "See all ",
-                    style: TextStyle(
-                        color: Colors.red,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.red,
-                    size: 15,
-                  )
-                ],
+              GestureDetector(
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const NewArrivalsPage())),
+                child: const Row(
+                  children: [
+                    Text(
+                      "See all ",
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.red,
+                      size: 15,
+                    )
+                  ],
+                ),
               )
             ],
           ),
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           Expanded(
               child: GridView.builder(
-                itemCount: 5,
+                  itemCount: 6,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, crossAxisSpacing: 10,mainAxisSpacing: 10),
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10),
                   itemBuilder: (context, index) => const SneakerTile()))
         ]),
       ),
