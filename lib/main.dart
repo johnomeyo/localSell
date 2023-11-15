@@ -11,7 +11,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.light(),
       home: const HomePage(),
     );
@@ -24,7 +25,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade200,
+      backgroundColor: Colors.red,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -32,7 +33,7 @@ class HomePage extends StatelessWidget {
             Icon(
               Icons.shopping_cart,
               size: 70,
-              color: Colors.grey.shade600,
+              color: Colors.grey.shade200,
             ),
             const SizedBox(
               height: 20,
@@ -42,7 +43,7 @@ class HomePage extends StatelessWidget {
               style: GoogleFonts.lato(
                   fontWeight: FontWeight.w700,
                   fontSize: 20,
-                  color: Colors.grey.shade700),
+                  color: Colors.grey.shade100),
             ),
             const SizedBox(
               height: 5,
@@ -50,7 +51,7 @@ class HomePage extends StatelessWidget {
             Text(
               "Style beyond boundaries",
               style: GoogleFonts.lato(
-                color: Colors.grey.shade600,
+                color: Colors.grey.shade200,
               ),
             ),
             const SizedBox(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:local_sell/components/constants.dart';
+import 'package:local_sell/pages/cart_page.dart';
 
 class ProductDetails extends StatelessWidget {
   const ProductDetails({super.key});
@@ -22,6 +23,18 @@ class ProductDetails extends StatelessWidget {
           "Product Details",
           style: style3,
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: IconButton(
+                onPressed: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const CartPage())),
+                icon: const Icon(
+                  Icons.shopping_cart_outlined,
+                  color: Colors.black,
+                )),
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -125,11 +138,10 @@ class ProductDetails extends StatelessWidget {
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.5), // Shadow color
-                          spreadRadius: 5, // Spread radius
-                          blurRadius: 7, // Blur radius
-                          offset: const Offset(
-                              0, 3), // Offset (horizontal, vertical)
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: const Offset(0, 3),
                         ),
                       ],
                     ),
@@ -137,7 +149,7 @@ class ProductDetails extends StatelessWidget {
                         onPressed: () {},
                         icon: const Icon(Icons.favorite_border_outlined)),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Container(
                     decoration: BoxDecoration(
                         color: Colors.red,
