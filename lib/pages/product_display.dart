@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:local_sell/components/constants.dart';
 import 'package:local_sell/pages/cart_page.dart';
 
-class ProductDetails extends StatelessWidget {
+class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key});
+
+  @override
+  State<ProductDetails> createState() => _ProductDetailsState();
+}
+
+class _ProductDetailsState extends State<ProductDetails> {
+  final sizeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -101,11 +108,12 @@ class ProductDetails extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5)),
                     height: 40,
                     width: 40,
-                    child: const Center(
+                    child:  Center(
                       child: TextField(
+                        controller: sizeController,
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
+                        decoration:const InputDecoration(
                           border: InputBorder.none,
                         ),
                       ),

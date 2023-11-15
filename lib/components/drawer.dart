@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:local_sell/components/alpha.dart';
 import 'package:local_sell/components/constants.dart';
+import 'package:local_sell/pages/cart_page.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -34,7 +35,7 @@ class MyDrawer extends StatelessWidget {
                 style: TextStyle(color: Colors.black),
               )),
               DrawerTiles(
-              onTap: () {},
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>const CartPage())),
               child: const Text(
                 'C A R T',
                 style: TextStyle(color: Colors.black),
