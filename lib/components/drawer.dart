@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:local_sell/components/alpha.dart';
 import 'package:local_sell/components/constants.dart';
 import 'package:local_sell/pages/cart_page.dart';
+import 'package:local_sell/pages/favorites_page.dart';
+import 'package:local_sell/pages/profile.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -23,40 +25,44 @@ class MyDrawer extends StatelessWidget {
             ),
           ),
           DrawerTiles(
-              onTap: ()=> Navigator.pop(context),
+              onTap: () => Navigator.pop(context),
               child: const Text(
                 'S H O P',
                 style: TextStyle(color: Colors.black),
               )),
-              DrawerTiles(
-              onTap: () {},
+          DrawerTiles(
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const FavoritesPage())),
               child: const Text(
                 'F A V O R I T E S',
                 style: TextStyle(color: Colors.black),
               )),
-              DrawerTiles(
-              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>const CartPage())),
+          DrawerTiles(
+              onTap: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const CartPage())),
               child: const Text(
                 'C A R T',
                 style: TextStyle(color: Colors.black),
               )),
-              DrawerTiles(
-              onTap: () {},
+          DrawerTiles(
+              onTap: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const ProfilePage())),
               child: const Text(
                 'P R O F I L E',
                 style: TextStyle(color: Colors.black),
               )),
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: DrawerTiles(
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: DrawerTiles(
                 onTap: () {},
                 child: const Text(
                   'E X I T',
                   style: TextStyle(color: Colors.black),
                 )),
-              ),
-
+          ),
         ],
       ),
     );

@@ -103,20 +103,32 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: backgroundColor,
       body: pages[selectedIndex],
       bottomNavigationBar: GNav(
-        activeColor: Colors.black,
-        tabBackgroundColor: backgroundColor,
-        duration: const Duration(seconds: 2),
+          activeColor: Colors.black,
+          tabBackgroundColor: backgroundColor,
+          duration: const Duration(seconds: 2),
           selectedIndex: selectedIndex,
           onTabChange: (value) {
             setState(() {
               selectedIndex = value;
             });
           },
-          tabs:  [
-            GButton(icon: Icons.home_outlined, iconColor: Colors.grey.shade300,),
-            GButton(icon: Icons.shopping_bag_outlined, iconColor: Colors.grey.shade300,),
-            GButton(icon: Icons.favorite_outline, iconColor: Colors.grey.shade300,),
-            GButton(icon: Icons.person_3_rounded,iconColor: Colors.grey.shade300,)
+          tabs: [
+            GButton(
+              icon: Icons.home_outlined,
+              iconColor: Colors.grey.shade400,
+            ),
+            GButton(
+              icon: Icons.shopping_bag_outlined,
+              iconColor: Colors.grey.shade400,
+            ),
+            GButton(
+              icon: Icons.favorite_outline,
+              iconColor: Colors.grey.shade400,
+            ),
+            GButton(
+              icon: Icons.person_3_rounded,
+              iconColor: Colors.grey.shade400,
+            )
           ]),
     );
   }
