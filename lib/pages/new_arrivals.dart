@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:local_sell/components/alpha.dart';
+import 'package:local_sell/components/beta.dart';
 import 'package:local_sell/components/constants.dart';
 import 'package:local_sell/pages/cart_page.dart';
 
@@ -21,12 +22,7 @@ class NewArrivalsPage extends StatelessWidget {
         elevation: 0,
         title: Text("New Arrivals", style: style3),
               actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.search,
-                color: Colors.black,
-              )),
+         const SearchButton(),
           Padding(
             padding: const EdgeInsets.only(right: 8),
             child: IconButton(

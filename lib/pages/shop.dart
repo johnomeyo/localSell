@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_sell/components/alpha.dart';
+import 'package:local_sell/components/beta.dart';
 import 'package:local_sell/components/constants.dart';
 import 'package:local_sell/components/drawer.dart';
 import 'package:local_sell/pages/cart_page.dart';
@@ -35,12 +36,7 @@ class Shop extends StatelessWidget {
           },
         ),
         actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.search,
-                color: Colors.black,
-              )),
+        const SearchButton(),
           Padding(
             padding: const EdgeInsets.only(right: 8),
             child: IconButton(
