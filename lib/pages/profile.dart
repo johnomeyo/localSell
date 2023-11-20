@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:local_sell/auth/sign_up.dart';
 import 'package:local_sell/components/beta.dart';
 import 'package:local_sell/components/constants.dart';
 import 'package:local_sell/components/gamma.dart';
@@ -63,8 +64,11 @@ class ProfilePage extends StatelessWidget {
                   const SizedBox(
                     height: 15,
                   ),
-                  const ProfileTiles(
-                      title: "Edit Profile", text: "Change your details"),
+                  GestureDetector(
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> const SignUpPage())),
+                    child: const ProfileTiles(
+                        title: "Edit Profile", text: "Change your details"),
+                  ),
                   // const ProfileTiles(
                   //     title: "My Orders", text: "Already have 12 orders"),
                   const ProfileTiles(title: "Payment Method", text: "Mpesa"),
