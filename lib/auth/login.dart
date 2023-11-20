@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:local_sell/auth/sign_up.dart';
 import 'package:local_sell/components/delta.dart';
 import 'package:local_sell/components/gamma.dart';
 
@@ -33,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
                   TextButton(
                       onPressed: () {},
                       child: Text(
-                        "Need some help?",
+                        "Forgot Password?",
                         textAlign: TextAlign.right,
                         style: TextStyle(
                           color: Colors.grey.shade400,
@@ -47,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   children: [
                     Text(
-                      "Let's get started",
+                      "Welcome!!",
                       style: GoogleFonts.lato(
                           fontSize: 30, fontWeight: FontWeight.w600),
                     ),
@@ -55,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 10,
                     ),
                     Text(
-                      "Sign Up and we will continue",
+                      "Please enter your data to continue",
                       style: GoogleFonts.lato(color: Colors.grey),
                     ),
                   ],
@@ -69,12 +70,6 @@ class _LoginPageState extends State<LoginPage> {
                 hintText: 'johndoe@gmail.com',
                 prefixIcon: const Icon(Icons.email_outlined),
                 controller: emailController,
-              ),
-              MyTextField(
-                title: "Username",
-                hintText: "john doe",
-                prefixIcon: const Icon(Icons.person_3_outlined),
-                controller: usernameController,
               ),
               MyTextField(
                 title: "Password",
@@ -133,15 +128,15 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 20,
               ),
-              const MyButtons(text: "Sign Up"),
+              const MyButtons(text: "Log In"),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text("Already have an account?"),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>const SignUpPage())),
                       child: const Text(
-                        "Sign In",
+                        "Sign Up",
                         style: TextStyle(color: Colors.red),
                       ))
                 ],

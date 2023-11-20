@@ -103,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: backgroundColor,
       body: pages[selectedIndex],
       bottomNavigationBar: GNav(
-          activeColor: Colors.black,
+          activeColor: Colors.red,
           tabBackgroundColor: backgroundColor,
           duration: const Duration(seconds: 2),
           selectedIndex: selectedIndex,
@@ -126,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
               iconColor: Colors.grey.shade400,
             ),
             GButton(
-              icon: Icons.person_3_rounded,
+              icon: Icons.person_3_outlined,
               iconColor: Colors.grey.shade400,
             )
           ]),
