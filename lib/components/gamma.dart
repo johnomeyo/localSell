@@ -53,6 +53,7 @@ class MyTextField extends StatelessWidget {
   final String hintText;
   final Widget prefixIcon;
   final Widget? suffixIcon;
+
   @override
   Widget build(BuildContext context) {
     return Padding(

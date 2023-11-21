@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:local_sell/auth/auth_methods.dart';
 import 'package:local_sell/auth/sign_up.dart';
 import 'package:local_sell/components/delta.dart';
 import 'package:local_sell/components/gamma.dart';
@@ -128,13 +129,20 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 20,
               ),
-              const MyButtons(text: "Log In"),
+              MyButtons(
+                text: "Log In",
+                ontap: () => AuthMethods().signIn(emailController.text.trim(),
+                    passwordController.text.trim()),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text("Already have an account?"),
                   TextButton(
-                      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>const SignUpPage())),
+                      onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignUpPage())),
                       child: const Text(
                         "Sign Up",
                         style: TextStyle(color: Colors.red),

@@ -14,17 +14,22 @@ class SignUpOptions extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class MyButtons extends StatelessWidget {
-  const MyButtons({super.key, required this.text});
+   MyButtons({super.key, required this.text, required this.ontap});
   final String text;
+   void Function() ontap;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(10)),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        child: Center(child: Text(text, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 18),)),
+    return GestureDetector(
+      onTap: ontap,
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(10)),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: Center(child: Text(text, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 18),)),
+        ),
       ),
     );
   }
