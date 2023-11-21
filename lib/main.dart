@@ -6,6 +6,7 @@ import 'package:local_sell/components/constants.dart';
 import 'package:local_sell/firebase_options.dart';
 import 'package:local_sell/pages/cart_page.dart';
 import 'package:local_sell/pages/favorites_page.dart';
+import 'package:local_sell/pages/product_upload.dart';
 import 'package:local_sell/pages/profile.dart';
 import 'package:local_sell/pages/shop.dart';
 
@@ -99,6 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> pages = [
     const Shop(),
     const CartPage(),
+    const UploadPage(),
     const FavoritesPage(),
     const ProfilePage()
   ];
@@ -124,6 +126,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             GButton(
               icon: Icons.shopping_bag_outlined,
+              iconColor: Colors.grey.shade400,
+            ),
+            GButton(
+              icon: Icons.cloud_upload_outlined,
               iconColor: Colors.grey.shade400,
             ),
             GButton(

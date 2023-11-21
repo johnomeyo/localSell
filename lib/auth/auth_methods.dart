@@ -8,8 +8,8 @@ class AuthMethods {
           .createUserWithEmailAndPassword(email: email, password: password);
       await FirebaseFirestore.instance.collection("users").add({
         "username": username,
-        "email":email,
-        "password":password,
+        "email": email,
+        "password": password,
       });
     } catch (e) {
       print('The error is $e');
