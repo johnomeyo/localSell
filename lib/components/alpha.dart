@@ -28,7 +28,7 @@ class SneakerTile extends StatelessWidget {
       onTap: () => Navigator.push(context,
           MaterialPageRoute(builder: (context) => const ProductDetails())),
       child: SizedBox(
-        height: 400,
+        height: 200,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -37,6 +37,8 @@ class SneakerTile extends StatelessWidget {
                 height: 150,
                 decoration: BoxDecoration(
                     color: containerBackground,
+                    // border: Border.all(color: Colors.black12),
+                    // color: Colors.amber,
                     image: const DecorationImage(
                         image: NetworkImage(
                             "https://images.unsplash.com/photo-1552346154-21d32810aba3?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),

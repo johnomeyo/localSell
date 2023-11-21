@@ -36,7 +36,7 @@ class Shop extends StatelessWidget {
           },
         ),
         actions: [
-        const SearchButton(),
+          const SearchButton(),
           Padding(
             padding: const EdgeInsets.only(right: 8),
             child: IconButton(
@@ -54,77 +54,89 @@ class Shop extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(
-              "Shoes Store",
-              style: style1,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                  color: containerBackground,
-                  borderRadius: BorderRadius.circular(10),
-                  image: const DecorationImage(
-                      image: NetworkImage(
-                          "https://images.unsplash.com/photo-1579338559194-a162d19bf842?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHNuZWFrZXJzfGVufDB8fDB8fHww"),
-                      fit: BoxFit.cover)),
-              height: 200,
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Air Jordan',
-                  style: style2,
-                ),
+              Text(
+          "Shoes Store",
+          style: style1,
               ),
+              const SizedBox(
+          height: 10,
+              ),
+              Container(
+          decoration: BoxDecoration(
+              color: containerBackground,
+              borderRadius: BorderRadius.circular(10),
+              image: const DecorationImage(
+                  image: NetworkImage(
+                      "https://images.unsplash.com/photo-1579338559194-a162d19bf842?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHNuZWFrZXJzfGVufDB8fDB8fHww"),
+                  fit: BoxFit.cover)),
+          height: 200,
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Air Jordan',
+              style: style2,
             ),
-            const SizedBox(
-              height: 10,
+          ),
+              ),
+              const SizedBox(
+          height: 10,
+              ),
+              Row(
+          children: [
+            Text(
+              "New Arrivals",
+              style: style2,
             ),
-            Row(
-              children: [
-                Text(
-                  "New Arrivals",
-                  style: style2,
-                ),
-                const Spacer(),
-                GestureDetector(
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const NewArrivalsPage())),
-                  child: const Row(
-                    children: [
-                      Text(
-                        "See all ",
-                        style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      Icon(
-                        Icons.arrow_forward_ios,
+            const Spacer(),
+            GestureDetector(
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const NewArrivalsPage())),
+              child: const Row(
+                children: [
+                  Text(
+                    "See all ",
+                    style: TextStyle(
                         color: Colors.red,
-                        size: 15,
-                      )
-                    ],
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
                   ),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Expanded(
-                child: GridView.builder(
-                    itemCount: 6,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10),
-                    itemBuilder: (context, index) => const SneakerTile()))
-          ]),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.red,
+                    size: 15,
+                  )
+                ],
+              ),
+            )
+          ],
+              ),
+              const SizedBox(
+          height: 10,
+              ),
+              // const SingleChildScrollView(
+              //   scrollDirection: Axis.horizontal,
+              //   child: Row(
+              //     children: [
+              //       SneakerTile(),
+              //       SneakerTile(),
+              //       SneakerTile(),
+              //       SneakerTile(),
+              //       SneakerTile(),
+              //     ],
+              //   ),
+              // ),
+              Expanded(
+            child: GridView.builder(
+                itemCount: 6,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10),
+                itemBuilder: (context, index) => const SneakerTile()))
+            ]),
         ),
       ),
     );

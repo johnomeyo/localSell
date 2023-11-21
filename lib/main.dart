@@ -1,19 +1,24 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:local_sell/components/constants.dart';
+import 'package:local_sell/firebase_options.dart';
 import 'package:local_sell/pages/cart_page.dart';
 import 'package:local_sell/pages/favorites_page.dart';
 import 'package:local_sell/pages/profile.dart';
 import 'package:local_sell/pages/shop.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
