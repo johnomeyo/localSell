@@ -57,7 +57,7 @@ class _UploadPageState extends State<UploadPage> {
       await imageToUpload.putFile(File(selectedPath));
       imageUrl = await imageToUpload.getDownloadURL();
     } catch (e) {
-      print('An error $e occured');
+      Text("An error $e occurred");
     }
 
     await FirebaseFirestore.instance.collection("shop_items").add({
@@ -268,7 +268,23 @@ class _UploadPageState extends State<UploadPage> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: MyButtons(text: "Upload", ontap: () => uploadPost()),
+                child: MyButtons(
+                    text: "Upload",
+                    ontap: () {
+                      if (priceController.text.isNotEmpty &&
+                          titleController.text.isNotEmpty &&
+                          descriptionController.text.isNotEmpty &&
+                          sizeController.text.isNotEmpty &&
+                          conditionController.text.isNotEmpty &&
+                          measurementController.text.isNotEmpty) {
+                        uploadPost();
+                      }
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (context) => const SnackBar(
+                              content: Text(
+                                  "Ensure all the required fields are filled")));
+                    }),
               )
             ],
           ),

@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:local_sell/auth/auth.dart';
 import 'package:local_sell/components/constants.dart';
 import 'package:local_sell/firebase_options.dart';
 import 'package:local_sell/pages/cart_page.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(),
-      home: const MyHomePage(),
+      home: const AuthPage(),
     );
   }
 }
@@ -102,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
     const CartPage(),
     const UploadPage(),
     const FavoritesPage(),
-    const ProfilePage()
+     const Profile()
   ];
   @override
   Widget build(BuildContext context) {

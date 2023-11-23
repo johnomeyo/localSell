@@ -76,6 +76,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 prefixIcon: const Icon(Icons.person_3_outlined),
                 controller: usernameController,
               ),
+              
               MyTextField(
                 title: "Password",
                 hintText: "********",

@@ -49,7 +49,7 @@ class MyDrawer extends StatelessWidget {
               )),
           DrawerTiles(
               onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const ProfilePage())),
+                  MaterialPageRoute(builder: (context) => const Profile())),
               child: const Text(
                 'P R O F I L E',
                 style: TextStyle(color: Colors.black),

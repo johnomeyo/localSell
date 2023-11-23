@@ -73,7 +73,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         height: 20,
                       ),
                       Text(widget.product.price,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.red, fontWeight: FontWeight.w600)),
                       const SizedBox(
                         height: 20,
@@ -102,23 +102,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   const SizedBox(
                     width: 20,
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(5)),
-                    height: 40,
-                    width: 40,
-                    child: Center(
-                      child: TextField(
-                        controller: sizeController,
-                        textAlign: TextAlign.center,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                        ),
-                      ),
-                    ),
-                  )
+                 Text(widget.product.price)
                 ],
               ),
               const SizedBox(
