@@ -6,7 +6,7 @@ class AuthMethods {
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-      await FirebaseFirestore.instance.collection("users").add({
+      await FirebaseFirestore.instance.collection("users").doc(email).set({
         "username": username,
         "email": email,
         "password": password,
