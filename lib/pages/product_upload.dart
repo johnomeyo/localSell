@@ -2,6 +2,8 @@
 
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -20,9 +22,10 @@ class _UploadPageState extends State<UploadPage> {
   final descriptionController = TextEditingController();
   final priceController = TextEditingController();
   final sizeController = TextEditingController();
-  final mileageController = TextEditingController();
+  final conditionController = TextEditingController();
   final measurementController = TextEditingController();
   String selectedPath = "";
+  String imageUrl = "";
 
   selectImageFromGallery() async {
     XFile? file = await ImagePicker()
@@ -44,7 +47,29 @@ class _UploadPageState extends State<UploadPage> {
     }
   }
 
-  uploadPost() async {}
+  uploadPost() async {
+    if (selectedPath == '') return;
+    String uniqueName = DateTime.now().microsecondsSinceEpoch.toString();
+    Reference referenceRoot = FirebaseStorage.instance.ref();
+    Reference referenceDirImages = referenceRoot.child("images");
+    Reference imageToUpload = referenceDirImages.child(uniqueName);
+    try {
+      await imageToUpload.putFile(File(selectedPath));
+      imageUrl = await imageToUpload.getDownloadURL();
+    } catch (e) {
+      print('An error $e occured');
+    }
+
+    await FirebaseFirestore.instance.collection("shop_items").add({
+      "price": priceController.text,
+      "title": titleController.text,
+      "description": descriptionController.text,
+      "condition": conditionController.text,
+      "size": sizeController.text,
+      "measurement": measurementController.text,
+      "imageUrl": imageUrl
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +112,7 @@ class _UploadPageState extends State<UploadPage> {
                           color: Colors.grey[200]),
                       child: selectedPath == ""
                           ? GestureDetector(
-                              onTap: () {
+                              onTap: () async {
                                 showDialog(
                                     context: context,
                                     builder: (context) => AlertDialog(
@@ -194,17 +219,6 @@ class _UploadPageState extends State<UploadPage> {
                                           ),
                                         ));
                               },
-                              // onTap: () async {
-                              //   selectedPath = await selectImageFromGallery();
-                              //   if (selectedPath != "") {
-                              //     // Navigator.pop(context);
-                              //     setState(() {});
-                              //   } else {
-                              //     ScaffoldMessenger.of(context).showSnackBar(
-                              //         const SnackBar(
-                              //             content: Text("No image selected")));
-                              //   }
-                              // },
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -241,7 +255,7 @@ class _UploadPageState extends State<UploadPage> {
               ),
               UploadPageTextBox(
                 field: 'Condition',
-                fieldController: mileageController,
+                fieldController: conditionController,
                 hintText: 'E.g., new, used, refurbished',
               ),
               UploadPageTextBox(
