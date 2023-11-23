@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:local_sell/components/alpha.dart';
 import 'package:local_sell/components/beta.dart';
 import 'package:local_sell/components/constants.dart';
 import 'package:local_sell/pages/cart_page.dart';
@@ -21,8 +20,8 @@ class NewArrivalsPage extends StatelessWidget {
             )),
         elevation: 0,
         title: Text("New Arrivals", style: style3),
-              actions: [
-         const SearchButton(),
+        actions: [
+          const SearchButton(),
           Padding(
             padding: const EdgeInsets.only(right: 8),
             child: IconButton(
@@ -36,14 +35,14 @@ class NewArrivalsPage extends StatelessWidget {
         ],
       ),
       backgroundColor: backgroundColor,
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: GridView.builder(
-            itemCount: 10,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
-            itemBuilder: (context, index) => const SneakerTile()),
-      ),
+      // body: Padding(
+      //   padding: const EdgeInsets.all(16.0),
+      //   child: GridView.builder(
+      //       itemCount: 10,
+      //       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      //           crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
+      //       itemBuilder: (context, index) => const SneakerTile()),
+      // ),
     );
   }
 }

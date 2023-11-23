@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_sell/components/alpha.dart';
 import 'package:local_sell/components/beta.dart';
 import 'package:local_sell/components/constants.dart';
 import 'package:local_sell/components/drawer.dart';
+import 'package:local_sell/models/product_model.dart';
 import 'package:local_sell/pages/cart_page.dart';
 import 'package:local_sell/pages/new_arrivals.dart';
 
@@ -117,27 +119,35 @@ class Shop extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            // const SingleChildScrollView(
-            //   scrollDirection: Axis.horizontal,
-            //   child: Row(
-            //     children: [
-            //       SneakerTile(),
-            //       SneakerTile(),
-            //       SneakerTile(),
-            //       SneakerTile(),
-            //       SneakerTile(),
-            //     ],
-            //   ),
-            // ),
-            Expanded(
-                child: GridView.builder(
-                    itemCount: 6,
+            StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection("shop_items")
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return const Text("Network Error");
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  }
+                  var docs = snapshot.data!.docs;
+                  return Expanded(
+                      child: GridView.builder(
+                    itemCount: docs.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10),
-                    itemBuilder: (context, index) => const SneakerTile()))
+                    itemBuilder: (context, index) => SneakerTile(
+                      product: Product(
+                          name: docs[index]['title'],
+                          price: docs[index]['price'],
+                          description: docs[index]['description'],
+                          imageUrl: docs[index]['imageUrl']),
+                    ),
+                  ));
+                })
           ]),
         ),
       ),

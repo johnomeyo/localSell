@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:local_sell/components/constants.dart';
+import 'package:local_sell/models/product_model.dart';
 import 'package:local_sell/pages/cart_page.dart';
 
 class ProductDetails extends StatefulWidget {
-  const ProductDetails({super.key});
-
+  const ProductDetails({super.key, required this.product});
+  final Product product;
   @override
   State<ProductDetails> createState() => _ProductDetailsState();
 }
@@ -61,7 +62,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Nike Air Force 1",
+                        widget.product.name,
                         style: style3,
                       ),
                       const SizedBox(
@@ -71,7 +72,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       const SizedBox(
                         height: 20,
                       ),
-                      const Text("Ksh. 2500",
+                      Text(widget.product.price,
                           style: TextStyle(
                               color: Colors.red, fontWeight: FontWeight.w600)),
                       const SizedBox(
@@ -81,9 +82,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                         height: 200,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            image: const DecorationImage(
-                                image: NetworkImage(
-                                    "https://images.unsplash.com/photo-1549298916-f52d724204b4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHNuZWFrZXJzfGVufDB8fDB8fHww"),
+                            image: DecorationImage(
+                                image: NetworkImage(widget.product.imageUrl),
                                 fit: BoxFit.cover)),
                       )
                     ],
@@ -108,12 +108,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                         borderRadius: BorderRadius.circular(5)),
                     height: 40,
                     width: 40,
-                    child:  Center(
+                    child: Center(
                       child: TextField(
                         controller: sizeController,
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.number,
-                        decoration:const InputDecoration(
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                         ),
                       ),
@@ -132,7 +132,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 height: 10,
               ),
               Text(
-                "Nike shoes are designed for perfomance and everyday wear for men, women and kids",
+                widget.product.description,
                 style: TextStyle(color: Colors.grey.shade600),
               ),
               const SizedBox(
