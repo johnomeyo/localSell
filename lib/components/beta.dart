@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:local_sell/pages/search_page.dart';
 
 class CartTiles extends StatelessWidget {
   const CartTiles({super.key});
@@ -133,7 +134,8 @@ class SearchButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-        onPressed: () {},
+        onPressed: () => Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const SearchPage())),
         icon: const Icon(
           Icons.search,
           color: Colors.black,

@@ -37,16 +37,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.grey,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.shopping_cart,
-              size: 70,
-              color: Colors.grey.shade200,
-            ),
+            Image.asset("assets/bag.png", height: 150,),
             const SizedBox(
               height: 20,
             ),
@@ -103,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
     const CartPage(),
     const UploadPage(),
     const FavoritesPage(),
-     const Profile()
+    const Profile()
   ];
   @override
   Widget build(BuildContext context) {
