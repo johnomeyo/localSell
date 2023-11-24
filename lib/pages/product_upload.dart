@@ -67,8 +67,20 @@ class _UploadPageState extends State<UploadPage> {
       "condition": conditionController.text,
       "size": sizeController.text,
       "measurement": measurementController.text,
-      "imageUrl": imageUrl
+      "imageUrl": imageUrl,
+      "timestamp": DateTime.now()
     });
+  }
+
+  @override
+  void initState() {
+    titleController.clear();
+    priceController.clear();
+    descriptionController.clear();
+    sizeController.clear();
+    measurementController.clear();
+    conditionController.clear();
+    super.initState();
   }
 
   @override
@@ -271,19 +283,15 @@ class _UploadPageState extends State<UploadPage> {
                 child: MyButtons(
                     text: "Upload",
                     ontap: () {
-                      if (priceController.text.isNotEmpty &&
-                          titleController.text.isNotEmpty &&
-                          descriptionController.text.isNotEmpty &&
-                          sizeController.text.isNotEmpty &&
-                          conditionController.text.isNotEmpty &&
-                          measurementController.text.isNotEmpty) {
-                        uploadPost();
-                      }
-                      showModalBottomSheet(
-                          context: context,
-                          builder: (context) => const SnackBar(
-                              content: Text(
-                                  "Ensure all the required fields are filled")));
+                      // if (priceController.text.isNotEmpty &&
+                      //     titleController.text.isNotEmpty &&
+                      //     descriptionController.text.isNotEmpty &&
+                      //     sizeController.text.isNotEmpty &&
+                      //     conditionController.text.isNotEmpty &&
+                      //     measurementController.text.isNotEmpty) {
+
+                      // }
+                      uploadPost();
                     }),
               )
             ],
