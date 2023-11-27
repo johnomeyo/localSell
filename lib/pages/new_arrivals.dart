@@ -53,13 +53,17 @@ class NewArrivalsPage extends StatelessWidget {
               child: GridView.builder(
                 itemCount: docs.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10),
                 itemBuilder: (context, index) => SneakerTile(
                   product: Product(
-                      name: docs[index]['title'],
-                      price: docs[index]['price'],
-                      description: docs[index]['description'],
-                      imageUrl: docs[index]['imageUrl']),
+                    name: docs[index]['title'],
+                    price: docs[index]['price'],
+                    description: docs[index]['description'],
+                    imageUrl: docs[index]['imageUrl'],
+                    size: docs[index]['size'],
+                  ),
                 ),
               ),
             );

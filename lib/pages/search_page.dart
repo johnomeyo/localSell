@@ -16,6 +16,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
   String search = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,11 +24,12 @@ class _SearchPageState extends State<SearchPage> {
         centerTitle: true,
         backgroundColor: backgroundColor,
         leading: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(
-              Icons.arrow_back_outlined,
-              color: Colors.black,
-            )),
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(
+            Icons.arrow_back_outlined,
+            color: Colors.black,
+          ),
+        ),
         elevation: 0,
         title: CupertinoTextField(
           controller: _searchController,
@@ -42,48 +44,59 @@ class _SearchPageState extends State<SearchPage> {
           Padding(
             padding: const EdgeInsets.only(right: 8),
             child: IconButton(
-                onPressed: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const CartPage())),
-                icon: const Icon(
-                  Icons.shopping_cart_outlined,
-                  color: Colors.black,
-                )),
-          )
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CartPage()),
+              ),
+              icon: const Icon(
+                Icons.shopping_cart_outlined,
+                color: Colors.black,
+              ),
+            ),
+          ),
         ],
       ),
       backgroundColor: backgroundColor,
       body: StreamBuilder<QuerySnapshot>(
-             stream: FirebaseFirestore.instance
-                    .collection("shop_items")
-                    .snapshots(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    return const Text("Network Error");
-                  } else if (snapshot.connectionState ==
-                      ConnectionState.waiting) {
-                    return const CircularProgressIndicator();
-                  }
-                  var docs = snapshot.data!.docs;
-                  return Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: GridView.builder(
-                      itemCount: docs.length,
-                      gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10),
-                      itemBuilder: (context, index) => SneakerTile(
+        stream: FirebaseFirestore.instance.collection("shop_items").snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return const Text("Network Error");
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          }
+
+          var docs = snapshot.data!.docs;
+
+          var filteredDocs = docs.where((doc) => doc['title']
+              .toString()
+              .toLowerCase()
+              .contains(search.toLowerCase()));
+
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: GridView.builder(
+                itemCount: filteredDocs.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                ),
+                itemBuilder: (context, index) {
+                  var doc = filteredDocs.toList()[index];
+                  return SneakerTile(
                     product: Product(
-                        name: docs[index]['title'],
-                        price: docs[index]['price'],
-                        description: docs[index]['description'],
-                        imageUrl: docs[index]['imageUrl']),
-                      ),
+                      name: doc['title'],
+                      price: doc['price'],
+                      description: doc['description'],
+                      imageUrl: doc['imageUrl'],
+                      size: doc['size'],
                     ),
                   );
-                }
-),
+                }),
+          );
+        },
+      ),
     );
   }
 }

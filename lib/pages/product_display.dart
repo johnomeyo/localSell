@@ -96,13 +96,13 @@ class _ProductDetailsState extends State<ProductDetails> {
               Row(
                 children: [
                   Text(
-                    "Size: ",
+                    "Size(s): ",
                     style: style3,
                   ),
                   const SizedBox(
                     width: 20,
                   ),
-                 Text(widget.product.price)
+                 Text(widget.product.size, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w400),),
                 ],
               ),
               const SizedBox(
