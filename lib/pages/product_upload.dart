@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_sell/components/delta.dart';
 import 'package:local_sell/components/gamma.dart';
+import 'package:local_sell/pages/shop.dart';
 
 class UploadPage extends StatefulWidget {
   const UploadPage({super.key});
@@ -21,6 +22,7 @@ class _UploadPageState extends State<UploadPage> {
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   final priceController = TextEditingController();
+  final categoryController = TextEditingController();
   final sizeController = TextEditingController();
   final conditionController = TextEditingController();
   final measurementController = TextEditingController();
@@ -63,6 +65,7 @@ class _UploadPageState extends State<UploadPage> {
     await FirebaseFirestore.instance.collection("shop_items").add({
       "price": priceController.text,
       "title": titleController.text,
+      "category": categoryController.text,
       "description": descriptionController.text,
       "condition": conditionController.text,
       "size": sizeController.text,
@@ -261,9 +264,14 @@ class _UploadPageState extends State<UploadPage> {
                 hintText: 'How much is the item?',
               ),
               UploadPageTextBox(
+                field: 'Category',
+                fieldController: categoryController,
+                hintText: 'Eg, Men\'s shoes,kids\'s clothes, gaming',
+              ),
+              UploadPageTextBox(
                 field: 'Size',
                 fieldController: sizeController,
-                hintText: 'What is the size of the item',
+                hintText: 'What is the size of the item?',
               ),
               UploadPageTextBox(
                 field: 'Condition',
@@ -283,15 +291,29 @@ class _UploadPageState extends State<UploadPage> {
                 child: MyButtons(
                     text: "Upload",
                     ontap: () {
-                      // if (priceController.text.isNotEmpty &&
-                      //     titleController.text.isNotEmpty &&
-                      //     descriptionController.text.isNotEmpty &&
-                      //     sizeController.text.isNotEmpty &&
-                      //     conditionController.text.isNotEmpty &&
-                      //     measurementController.text.isNotEmpty) {
-
-                      // }
-                      uploadPost();
+                      if (priceController.text.isNotEmpty &&
+                          titleController.text.isNotEmpty &&
+                          descriptionController.text.isNotEmpty &&
+                          sizeController.text.isNotEmpty &&
+                          conditionController.text.isNotEmpty &&
+                          categoryController.text.isNotEmpty &&
+                          selectedPath.isNotEmpty &&
+                          measurementController.text.isNotEmpty) {
+                        uploadPost();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Shop()));
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (context) => const SizedBox(
+                                height: 50,
+                                child: AlertDialog(
+                                  content: Text(
+                                      "Please fill in all the required values :)"),
+                                )));
+                      }
                     }),
               )
             ],

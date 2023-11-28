@@ -102,22 +102,44 @@ class _ProductDetailsState extends State<ProductDetails> {
                   const SizedBox(
                     width: 20,
                   ),
-                 Text(widget.product.size, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w400),),
+                  Text(
+                    widget.product.size,
+                    style: const TextStyle(
+                        fontSize: 17, fontWeight: FontWeight.w400),
+                  ),
                 ],
               ),
               const SizedBox(
                 height: 10,
               ),
-              Text(
-                "Description",
-                style: style3,
+              Row(
+                children: [
+                  Text(
+                    "Description",
+                    style: style3,
+                  ),
+                  const Spacer(),
+                  Text(
+                    "Condition",
+                    style: style3,
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 10,
               ),
-              Text(
-                widget.product.description,
-                style: TextStyle(color: Colors.grey.shade600),
+              Row(
+                children: [
+                  Text(
+                    widget.product.description,
+                    style: TextStyle(color: Colors.grey.shade600),
+                  ),
+                  const Spacer(),
+                  Text(
+                    widget.product.condition,
+                    style: TextStyle(color: Colors.grey.shade600),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 15,

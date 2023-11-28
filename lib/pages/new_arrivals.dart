@@ -63,6 +63,7 @@ class NewArrivalsPage extends StatelessWidget {
                     description: docs[index]['description'],
                     imageUrl: docs[index]['imageUrl'],
                     size: docs[index]['size'],
+                     condition: docs[index]['condition']
                   ),
                 ),
               ),

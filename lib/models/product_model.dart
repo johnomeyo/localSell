@@ -4,9 +4,11 @@ class Product {
   final String price;
   final String description;
   final String imageUrl;
+  final String condition;
 
   Product(
-      {required this.size,
+      {required this.condition,
+      required this.size,
       required this.name,
       required this.price,
       required this.description,

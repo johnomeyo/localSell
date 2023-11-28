@@ -16,6 +16,11 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
   String search = "";
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +96,7 @@ class _SearchPageState extends State<SearchPage> {
                       description: doc['description'],
                       imageUrl: doc['imageUrl'],
                       size: doc['size'],
+                       condition: docs[index]['condition']
                     ),
                   );
                 }),
