@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_sell/auth/auth_methods.dart';
 import 'package:local_sell/auth/login.dart';
 import 'package:local_sell/components/delta.dart';
@@ -16,7 +17,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
+  String phoneNumber = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,17 +72,40 @@ class _SignUpPageState extends State<SignUpPage> {
                 controller: emailController,
               ),
               MyTextField(
-                title: "Username",
-                hintText: "john doe",
-                prefixIcon: const Icon(Icons.person_3_outlined),
-                controller: usernameController,
-              ),
-              
-              MyTextField(
                 title: "Password",
                 hintText: "********",
                 prefixIcon: const Icon(Icons.lock_outline),
                 controller: passwordController,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Phone",
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: InternationalPhoneNumberInput(
+                      textStyle: const TextStyle(color: Colors.black),
+                      inputDecoration: const InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Phone Number",
+                      ),
+                      onInputChanged: (PhoneNumber number) {
+                        phoneNumber = number.phoneNumber!;
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              MyTextField(
+                title: "Username",
+                hintText: "john doe",
+                prefixIcon: const Icon(Icons.person_3_outlined),
+                controller: usernameController,
               ),
               const SizedBox(
                 height: 10,
@@ -137,9 +161,11 @@ class _SignUpPageState extends State<SignUpPage> {
               MyButtons(
                 text: "Sign Up",
                 ontap: () => AuthMethods().signUp(
-                    emailController.text.trim(),
-                    passwordController.text.trim(),
-                    usernameController.text.trim()),
+                  emailController.text.trim(),
+                  passwordController.text.trim(),
+                  usernameController.text.trim(),
+                  phoneNumber,
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

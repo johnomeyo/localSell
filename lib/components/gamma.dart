@@ -63,7 +63,7 @@ class MyTextField extends StatelessWidget {
         children: [
           Text(
             title,
-            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+            style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
           ),
           const SizedBox(
             height: 10,

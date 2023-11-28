@@ -3,12 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AuthMethods {
-  void signUp(String email, String password, String username) async {
+  void signUp(String email, String password, String username, String phone) async {
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
       await FirebaseFirestore.instance.collection("users").doc(email).set({
         "username": username,
+        "phone":phone,
         "email": email,
         "password": password,
       });
