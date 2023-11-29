@@ -10,13 +10,20 @@ import 'package:local_sell/pages/favorites_page.dart';
 import 'package:local_sell/pages/product_upload.dart';
 import 'package:local_sell/pages/profile.dart';
 import 'package:local_sell/pages/shop.dart';
+import 'package:local_sell/providers/cart_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => CartModel(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -42,7 +49,10 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("assets/bag.png", height: 150,),
+            Image.asset(
+              "assets/bag.png",
+              height: 150,
+            ),
             const SizedBox(
               height: 20,
             ),

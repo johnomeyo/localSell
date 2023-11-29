@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:local_sell/components/constants.dart';
 import 'package:local_sell/models/product_model.dart';
 import 'package:local_sell/pages/cart_page.dart';
+import 'package:local_sell/providers/cart_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key, required this.product});
@@ -164,23 +166,29 @@ class _ProductDetailsState extends State<ProductDetails> {
                         icon: const Icon(Icons.favorite_border_outlined)),
                   ),
                   const Spacer(),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: const Padding(
-                      padding: EdgeInsets.all(12.0),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.shopping_cart_outlined,
-                            color: Colors.white,
-                          ),
-                          Text(
-                            "Add to Cart",
-                            style: TextStyle(color: Colors.white),
-                          )
-                        ],
+                  GestureDetector(
+                    onTap: () {
+                      Provider.of<CartModel>(context, listen: false)
+                          .addToCart(widget.product);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: const Padding(
+                        padding: EdgeInsets.all(12.0),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.shopping_cart_outlined,
+                              color: Colors.white,
+                            ),
+                            Text(
+                              "Add to Cart",
+                              style: TextStyle(color: Colors.white),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   )

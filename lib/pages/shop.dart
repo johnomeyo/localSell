@@ -5,6 +5,7 @@ import 'package:local_sell/components/alpha.dart';
 import 'package:local_sell/components/beta.dart';
 import 'package:local_sell/components/constants.dart';
 import 'package:local_sell/components/drawer.dart';
+import 'package:local_sell/components/shimmers/sneakertile.dart';
 import 'package:local_sell/models/product_model.dart';
 import 'package:local_sell/pages/cart_page.dart';
 import 'package:local_sell/pages/new_arrivals.dart';
@@ -128,7 +129,7 @@ class Shop extends StatelessWidget {
                     return const Text("Network Error");
                   } else if (snapshot.connectionState ==
                       ConnectionState.waiting) {
-                    return const CircularProgressIndicator();
+                    return const SneakerTileShimmer();
                   }
                   var docs = snapshot.data!.docs;
                   return Expanded(
