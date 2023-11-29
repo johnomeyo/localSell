@@ -170,6 +170,19 @@ class _ProductDetailsState extends State<ProductDetails> {
                     onTap: () {
                       Provider.of<CartModel>(context, listen: false)
                           .addToCart(widget.product);
+                      var snackBar = SnackBar(
+                        backgroundColor: Colors.grey.shade200,
+                        content: Container(
+                            padding: const EdgeInsets.all(16.0),
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(
+                                  10.0), // Set your desired corner radius
+                            ),
+                            child: const Text('Successfully added to cart')),
+                        duration: const Duration(seconds: 2),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     },
                     child: Container(
                       decoration: BoxDecoration(
