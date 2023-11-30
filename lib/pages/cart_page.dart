@@ -1,5 +1,3 @@
-// import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:local_sell/components/beta.dart';
@@ -17,6 +15,7 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,8 +45,13 @@ class _CartPageState extends State<CartPage> {
                         Icons.shopping_cart_outlined,
                         size: 80,
                       ),
-                      SizedBox(height: 10,),
-                      Text("Oops, your cart seems to be empty😪", style: TextStyle(fontSize: 17),),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Oops, your cart seems to be empty😪",
+                        style: TextStyle(fontSize: 17),
+                      ),
                     ],
                   ),
                 )
