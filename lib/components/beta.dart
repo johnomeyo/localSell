@@ -114,8 +114,16 @@ class _CartTilesState extends State<CartTiles> {
 }
 
 class FavoriteTile extends StatelessWidget {
-  const FavoriteTile({super.key});
-
+  const FavoriteTile(
+      {super.key,
+      required this.name,
+      required this.price,
+      required this.category,
+      required this.imageUrl});
+  final String name;
+  final String price;
+  final String category;
+  final String imageUrl;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -132,37 +140,41 @@ class FavoriteTile extends StatelessWidget {
               width: 70,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
-                  image: const DecorationImage(
-                      image: NetworkImage(
-                          "https://images.unsplash.com/photo-1549298916-f52d724204b4?q=80&w=1626&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
-                      fit: BoxFit.cover)),
+                  image: DecorationImage(
+                      image: NetworkImage(imageUrl), fit: BoxFit.cover)),
             ),
             const SizedBox(
               width: 10,
             ),
-            const Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Nike Air Force 1",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  name,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Text(
-                  "Men's shoe",
-                  style: TextStyle(fontSize: 10),
+                  category,
+                  style: const TextStyle(fontSize: 10),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
-                Text("Ksh 2300",
-                    style: TextStyle(
+                Text(price,
+                    style: const TextStyle(
                         fontWeight: FontWeight.w600, color: Colors.red)),
               ],
             ),
             const Spacer(),
+            IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.delete_outlined,
+                  color: Colors.red,
+                ))
           ]),
         ),
       ),

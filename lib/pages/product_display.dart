@@ -3,6 +3,7 @@ import 'package:local_sell/components/constants.dart';
 import 'package:local_sell/models/product_model.dart';
 import 'package:local_sell/pages/cart_page.dart';
 import 'package:local_sell/providers/cart_provider.dart';
+import 'package:local_sell/providers/favorite_provider.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -148,23 +149,29 @@ class _ProductDetailsState extends State<ProductDetails> {
               ),
               Row(
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: const Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.favorite_border_outlined)),
-                  ),
+                  Consumer<FavoriteProvider>(builder:
+                      (BuildContext context, favoriteProvider, Widget? child) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: IconButton(
+                          onPressed: () {
+                            favoriteProvider.addToFavorites(widget.product);
+                            print(favoriteProvider.favorites.length);
+                          },
+                          icon: favoriteProvider.isFavorite(widget.product)? const Icon(Icons.favorite, color: Colors.red,) :const Icon(Icons.favorite_border_outlined) ),
+                    );
+                  }),
                   const Spacer(),
                   GestureDetector(
                     onTap: () {

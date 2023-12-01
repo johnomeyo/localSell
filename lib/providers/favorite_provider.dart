@@ -5,15 +5,16 @@ class FavoriteProvider extends ChangeNotifier {
   final List<Product> _favoriteProducts = [];
   List<Product> get favorites => _favoriteProducts;
   addToFavorites(Product product) {
-   if(!_favoriteProducts.contains(product)){
-
-   }
-    notifyListeners();
+    if (!_favoriteProducts.contains(product)) {
+      _favoriteProducts.add(product);
+      notifyListeners();
+    }
   }
 
   removeFromFavorites(Product product) {
-    _favoriteProducts.remove(product);
-    notifyListeners();
+  if(_favoriteProducts.contains(product)){
+      _favoriteProducts.remove(product);
+  }
   }
 
   bool isFavorite(Product product) {

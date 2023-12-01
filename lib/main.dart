@@ -11,6 +11,7 @@ import 'package:local_sell/pages/product_upload.dart';
 import 'package:local_sell/pages/profile.dart';
 import 'package:local_sell/pages/shop.dart';
 import 'package:local_sell/providers/cart_provider.dart';
+import 'package:local_sell/providers/favorite_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -19,10 +20,11 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => CartModel(),
-      child: const MyApp(),
-    ),
+    MultiProvider(providers: [
+      ChangeNotifierProvider<CartModel>(create: (context) => CartModel()),
+      ChangeNotifierProvider<FavoriteProvider>(
+          create: (context) => FavoriteProvider()),
+    ], child: const MyApp()),
   );
 }
 
