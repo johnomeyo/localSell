@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_sell/components/alpha.dart';
@@ -77,9 +78,12 @@ class Shop extends StatelessWidget {
               width: double.infinity,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Air Jordan',
-                  style: style2,
+                child: GestureDetector(
+                  onTap: () => FirebaseAuth.instance.signOut,
+                  child: Text(
+                    'Air Jordan',
+                    style: style2,
+                  ),
                 ),
               ),
             ),

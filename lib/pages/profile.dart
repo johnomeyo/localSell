@@ -58,7 +58,8 @@ class _ProfileState extends State<Profile> {
                           children: [
                             Text(
                               userData['username'],
-                              style: const TextStyle(fontWeight: FontWeight.bold),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(
                               height: 5,
@@ -83,7 +84,7 @@ class _ProfileState extends State<Profile> {
                           title: "Edit Profile", text: "Change your details"),
                     ),
                     const ProfileTiles(title: "Payment Method", text: "Mpesa"),
-                    const ProfileTiles(title: "Telephone", text: "0729822061"),
+                    ProfileTiles(title: "Telephone", text: userData['phone']),
                     const ProfileTiles(
                         title: "Settings", text: "Notifications, Password"),
                     TextButton(
@@ -141,110 +142,3 @@ class _ProfileState extends State<Profile> {
     ));
   }
 }
-
-
-/*
-SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "My Profile",
-                          style: style2,
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Row(
-                          children: [
-                            const CircleAvatar(
-                              radius: 30,
-                              backgroundImage: NetworkImage(
-                                  "https://images.unsplash.com/photo-1564038079594-99ba184fd036?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y3V0ZSUyMGdpcmxzfGVufDB8fDB8fHww"),
-                            ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  userData['username'],
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  userData['email'],
-                                  style: TextStyle(color: Colors.grey.shade600),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        GestureDetector(
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SignUpPage())),
-                          child: const ProfileTiles(
-                              title: "Edit Profile",
-                              text: "Change your details"),
-                        ),
-                        const ProfileTiles(
-                            title: "Payment Method", text: "Mpesa"),
-                        const ProfileTiles(
-                            title: "Telephone", text: "0729822061"),
-                        const ProfileTiles(
-                            title: "Settings", text: "Notifications, Password"),
-                        TextButton(
-                            onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                        content: SizedBox(
-                                          height: 80,
-                                          child: Column(
-                                            children: [
-                                              const Text(
-                                                  "Are you sure you want to log out?"),
-                                              const SizedBox(
-                                                height: 10,
-                                              ),
-                                              Row(
-                                                children: [
-                                                  TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              context),
-                                                      child:
-                                                          const Text("Cancel")),
-                                                  const Spacer(),
-                                                  TextButton(
-                                                      onPressed: () {
-                                                        AuthMethods().signOut();
-                                                        Navigator.pop(context);
-                                                      },
-                                                      child: const Text("Yes")),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ));
-                            },
-                            child: const Text(
-                              "Log Out",
-                              style:
-                                  TextStyle(fontSize: 17, color: Colors.black),
-                            ))
-                      ],
-                    ),
-                  ),
-
-*/

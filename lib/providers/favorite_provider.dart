@@ -9,6 +9,7 @@ class FavoriteProvider extends ChangeNotifier {
       _favoriteProducts.add(product);
       notifyListeners();
     }
+    
   }
 
   removeFromFavorites(Product product) {

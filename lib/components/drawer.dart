@@ -58,8 +58,10 @@ class MyDrawer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 20),
             child: DrawerTiles(
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Dummy())),
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ImagePickerExample())),
                 child: const Text(
                   'E X I T',
                   style: TextStyle(color: Colors.black),

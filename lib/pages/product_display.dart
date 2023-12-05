@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:local_sell/components/constants.dart';
 import 'package:local_sell/models/product_model.dart';
@@ -15,6 +16,12 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   final sizeController = TextEditingController();
+  List<String> imageUrls = [
+    "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1624&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?q=80&w=1898&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=1664&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1543508282-6319a3e2621f?q=80&w=1615&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -81,13 +88,36 @@ class _ProductDetailsState extends State<ProductDetails> {
                       const SizedBox(
                         height: 20,
                       ),
-                      Container(
-                        height: 200,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                                image: NetworkImage(widget.product.imageUrl),
-                                fit: BoxFit.cover)),
+                      // Container(
+                      //   height: 200,
+                      //   decoration: BoxDecoration(
+                      //       borderRadius: BorderRadius.circular(10),
+                      //       image: DecorationImage(
+                      //           image: NetworkImage(widget.product.imageUrl),
+                      //           fit: BoxFit.cover)),
+                      // )
+                      CarouselSlider(
+                        
+                        items: imageUrls.map((url) {
+                          return Builder(builder: (context) {
+                            return Container(
+                              width: MediaQuery.of(context).size.width,
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 5.0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.grey[300],
+                              ),
+                              child: Image.network(
+                                url,
+                                fit: BoxFit.cover,
+                              ),
+                            );
+                          });
+                        }).toList(),
+                        options: CarouselOptions(
+                          enlargeCenterPage: true,
+                          height: 200),
                       )
                     ],
                   ),
@@ -166,10 +196,20 @@ class _ProductDetailsState extends State<ProductDetails> {
                       ),
                       child: IconButton(
                           onPressed: () {
-                            favoriteProvider.addToFavorites(widget.product);
-                            print(favoriteProvider.favorites.length);
+                            if (favoriteProvider.isFavorite(widget.product) !=
+                                true) {
+                              favoriteProvider.addToFavorites(widget.product);
+                              print(favoriteProvider.favorites.length);
+                            }
+                            // favoriteProvider
+                            //     .removeFromFavorites(widget.product);
                           },
-                          icon: favoriteProvider.isFavorite(widget.product)? const Icon(Icons.favorite, color: Colors.red,) :const Icon(Icons.favorite_border_outlined) ),
+                          icon: favoriteProvider.isFavorite(widget.product)
+                              ? const Icon(
+                                  Icons.favorite,
+                                  color: Colors.red,
+                                )
+                              : const Icon(Icons.favorite_border_outlined)),
                     );
                   }),
                   const Spacer(),

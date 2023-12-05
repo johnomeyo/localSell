@@ -14,12 +14,6 @@ class FavoritesPage extends StatelessWidget {
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: backgroundColor,
-          leading: IconButton(
-              onPressed: () => Navigator.pop(context),
-              icon: const Icon(
-                Icons.arrow_back_outlined,
-                color: Colors.black,
-              )),
           elevation: 0,
           title: Text(
             "Favorites",
