@@ -5,6 +5,7 @@ class Product {
   final String description;
   final String imageUrl;
   final String condition;
+  List<dynamic> carouselUrls;
 
   Product(
       {required this.condition,
@@ -12,5 +13,7 @@ class Product {
       required this.name,
       required this.price,
       required this.description,
-      required this.imageUrl});
+      required this.imageUrl,
+      required this.carouselUrls
+      });
 }

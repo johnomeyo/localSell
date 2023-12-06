@@ -91,13 +91,13 @@ class _SearchPageState extends State<SearchPage> {
                   var doc = filteredDocs.toList()[index];
                   return SneakerTile(
                     product: Product(
-                      name: doc['title'],
-                      price: doc['price'],
-                      description: doc['description'],
-                      imageUrl: doc['imageUrl'],
-                      size: doc['size'],
-                       condition: docs[index]['condition']
-                    ),
+                        name: doc['title'],
+                        price: doc['price'],
+                        description: doc['description'],
+                        imageUrl: doc['imageUrl'],
+                        size: doc['size'],
+                        condition: docs[index]['condition'],
+                        carouselUrls: docs[index]['imageUrls']),
                   );
                 }),
           );

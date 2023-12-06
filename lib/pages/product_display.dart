@@ -97,8 +97,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       //           fit: BoxFit.cover)),
                       // )
                       CarouselSlider(
-                        
-                        items: imageUrls.map((url) {
+                        items: widget.product.carouselUrls.map((url) {
                           return Builder(builder: (context) {
                             return Container(
                               width: MediaQuery.of(context).size.width,
@@ -116,8 +115,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                           });
                         }).toList(),
                         options: CarouselOptions(
-                          enlargeCenterPage: true,
-                          height: 200),
+                            enlargeCenterPage: true, height: 200),
                       )
                     ],
                   ),

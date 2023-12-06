@@ -138,7 +138,7 @@ class Shop extends StatelessWidget {
                   var docs = snapshot.data!.docs;
                   return Expanded(
                       child: GridView.builder(
-                    itemCount: 4,
+                    itemCount: docs.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
@@ -149,9 +149,10 @@ class Shop extends StatelessWidget {
                           name: docs[index]['title'],
                           price: docs[index]['price'],
                           description: docs[index]['description'],
-                          imageUrl: docs[index]['imageUrl'],
+                          imageUrl: docs[index]['displayPhoto'],
                           size: docs[index]['size'],
-                          condition: docs[index]['condition']),
+                          condition: docs[index]['condition'],
+                          carouselUrls: docs[index]['imageUrls']),
                     ),
                   ));
                 }),
