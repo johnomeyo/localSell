@@ -179,7 +179,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                   const Spacer(),
                   Text(
-                    "@astropphel",
+                    "@${widget.product.sellerUsername}",
                     style: TextStyle(
                         color: Colors.grey.shade900,
                         fontWeight: FontWeight.w500),
@@ -197,7 +197,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                   const Spacer(),
                   Text(
-                    "+254764982982",
+                    widget.product.sellerPhone,
                     style: TextStyle(
                         color: Colors.grey.shade900,
                         fontWeight: FontWeight.w500),

@@ -102,6 +102,8 @@ class _SearchPageState extends State<SearchPage> {
                       condition: docs[index]['condition'],
                       carouselUrls: docs[index]['imageUrls'],
                       category: docs[index]['category'],
+                       sellerUsername: docs[index]['sellerUsername'],
+                        sellerPhone: docs[index]['sellerPhone'],
                     ),
                   );
                 }),

@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,7 +28,7 @@ class _UploadPageState extends State<UploadPage> {
   final sizeController = TextEditingController();
   final conditionController = TextEditingController();
   final measurementController = TextEditingController();
-
+  final currentUser = FirebaseAuth.instance.currentUser;
   List<XFile> _imageList = [];
   final List<String> urlList = [];
 
@@ -38,7 +39,17 @@ class _UploadPageState extends State<UploadPage> {
     });
   }
 
-  uploadPost() async {
+  uploadPost(
+    String price,
+    String title,
+    String category,
+    String description,
+    String condition,
+    String size,
+    String measurement,
+    String sellerUsername,
+    String sellerPhone,
+  ) async {
     for (var img in _imageList) {
       var file = File(img.path);
       var fileName = DateTime.now().millisecondsSinceEpoch.toString();
@@ -49,16 +60,18 @@ class _UploadPageState extends State<UploadPage> {
     }
 
     await FirebaseFirestore.instance.collection("shop_items").add({
-      "price": priceController.text,
-      "title": titleController.text,
-      "category": categoryController.text,
-      "description": descriptionController.text,
-      "condition": conditionController.text,
-      "size": sizeController.text,
-      "measurement": measurementController.text,
+      "price": price,
+      "title": title,
+      "category": category,
+      "description": description,
+      "condition": condition,
+      "size": size,
+      "measurement": measurement,
       "imageUrls": urlList,
       'displayPhoto': urlList[0],
       "timestamp": DateTime.now(),
+      "sellerUsername": sellerUsername,
+      "sellerPhone": sellerPhone,
     });
   }
 
@@ -99,114 +112,143 @@ class _UploadPageState extends State<UploadPage> {
             )
           ],
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _imageList.isEmpty
-                  ? Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Container(
-                          height: 300,
-                          decoration: BoxDecoration(
-                              color: Colors.grey.shade300,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Center(
-                            child: GestureDetector(
-                              onTap: () async {
-                                await _pickImages();
-                              },
-                              child: Column(
-                                children: [
-                                  const SizedBox(
-                                    height: 50,
+        body: StreamBuilder(
+          stream: FirebaseFirestore.instance
+              .collection('users')
+              .doc(currentUser?.email)
+              .snapshots(),
+          builder: (BuildContext context,
+              AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>> snapshot) {
+            if (snapshot.hasError) {
+              return const Text("An error occured");
+            } else if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.red,
+                ),
+              );
+            }
+            final userData = snapshot.data!.data() as Map<String, dynamic>;
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _imageList.isEmpty
+                      ? Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Container(
+                              height: 300,
+                              decoration: BoxDecoration(
+                                  color: Colors.grey.shade300,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Center(
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    await _pickImages();
+                                  },
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(
+                                        height: 50,
+                                      ),
+                                      Image.asset('assets/post.png'),
+                                      const Text("Upload Images"),
+                                    ],
                                   ),
-                                  Image.asset('assets/post.png'),
-                                  const Text("Upload Images"),
-                                ],
-                              ),
-                            ),
-                          )),
-                    )
-                  : CarouselSlider(
-                      items: _imageList.map((image) {
-                        return Image.file(File(image.path));
-                      }).toList(),
-                      options: CarouselOptions(
-                        height: 300.0,
-                        enlargeCenterPage: true,
-                        aspectRatio: 16 / 9,
-                      ),
-                    ),
-              UploadPageTextBox(
-                field: 'Title',
-                fieldController: titleController,
-                hintText: 'Enter the name or title of the item',
+                                ),
+                              )),
+                        )
+                      : CarouselSlider(
+                          items: _imageList.map((image) {
+                            return Image.file(File(image.path));
+                          }).toList(),
+                          options: CarouselOptions(
+                            height: 300.0,
+                            enlargeCenterPage: true,
+                            aspectRatio: 16 / 9,
+                          ),
+                        ),
+                  UploadPageTextBox(
+                    field: 'Title',
+                    fieldController: titleController,
+                    hintText: 'Enter the name or title of the item',
+                  ),
+                  UploadPageTextBox(
+                    field: 'Description',
+                    fieldController: descriptionController,
+                    hintText: 'Give a brief description of the item.',
+                  ),
+                  UploadPageTextBox(
+                    field: 'Price',
+                    fieldController: priceController,
+                    hintText: 'How much is the item?',
+                  ),
+                  UploadPageTextBox(
+                    field: 'Category',
+                    fieldController: categoryController,
+                    hintText: 'Eg, Men\'s shoes,kids\'s clothes, gaming',
+                  ),
+                  UploadPageTextBox(
+                    field: 'Size',
+                    fieldController: sizeController,
+                    hintText: 'What is the size of the item?',
+                  ),
+                  UploadPageTextBox(
+                    field: 'Condition',
+                    fieldController: conditionController,
+                    hintText: 'E.g., new, used, refurbished',
+                  ),
+                  UploadPageTextBox(
+                    field: 'Measurements',
+                    fieldController: measurementController,
+                    hintText: 'Provide any relevant measurements of the item.',
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: MyButtons(
+                        text: "Upload",
+                        ontap: () {
+                          if (priceController.text.isNotEmpty &&
+                              titleController.text.isNotEmpty &&
+                              descriptionController.text.isNotEmpty &&
+                              sizeController.text.isNotEmpty &&
+                              conditionController.text.isNotEmpty &&
+                              categoryController.text.isNotEmpty &&
+                              measurementController.text.isNotEmpty) {
+                            uploadPost(
+                              priceController.text,
+                              titleController.text,
+                              categoryController.text,
+                              descriptionController.text,
+                              sizeController.text,
+                              measurementController.text,
+                              conditionController.text,
+                              userData['username'],
+                              userData['phone'],
+                            );
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Shop()));
+                          } else {
+                            showDialog(
+                                context: context,
+                                builder: (context) => const SizedBox(
+                                    height: 50,
+                                    child: AlertDialog(
+                                      content: Text(
+                                          "Please fill in all the required values :)"),
+                                    )));
+                          }
+                        }),
+                  )
+                ],
               ),
-              UploadPageTextBox(
-                field: 'Description',
-                fieldController: descriptionController,
-                hintText: 'Give a brief description of the item.',
-              ),
-              UploadPageTextBox(
-                field: 'Price',
-                fieldController: priceController,
-                hintText: 'How much is the item?',
-              ),
-              UploadPageTextBox(
-                field: 'Category',
-                fieldController: categoryController,
-                hintText: 'Eg, Men\'s shoes,kids\'s clothes, gaming',
-              ),
-              UploadPageTextBox(
-                field: 'Size',
-                fieldController: sizeController,
-                hintText: 'What is the size of the item?',
-              ),
-              UploadPageTextBox(
-                field: 'Condition',
-                fieldController: conditionController,
-                hintText: 'E.g., new, used, refurbished',
-              ),
-              UploadPageTextBox(
-                field: 'Measurements',
-                fieldController: measurementController,
-                hintText: 'Provide any relevant measurements of the item.',
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: MyButtons(
-                    text: "Upload",
-                    ontap: () {
-                      if (priceController.text.isNotEmpty &&
-                          titleController.text.isNotEmpty &&
-                          descriptionController.text.isNotEmpty &&
-                          sizeController.text.isNotEmpty &&
-                          conditionController.text.isNotEmpty &&
-                          categoryController.text.isNotEmpty &&
-                          measurementController.text.isNotEmpty) {
-                        uploadPost();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Shop()));
-                      } else {
-                        showDialog(
-                            context: context,
-                            builder: (context) => const SizedBox(
-                                height: 50,
-                                child: AlertDialog(
-                                  content: Text(
-                                      "Please fill in all the required values :)"),
-                                )));
-                      }
-                    }),
-              )
-            ],
-          ),
+            );
+          },
         ));
   }
 }
