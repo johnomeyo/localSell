@@ -68,7 +68,10 @@ class _SearchPageState extends State<SearchPage> {
           if (snapshot.hasError) {
             return const Text("Network Error");
           } else if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
+            return const Center(
+                child: CircularProgressIndicator(
+              color: Colors.red,
+            ));
           }
 
           var docs = snapshot.data!.docs;
@@ -91,13 +94,15 @@ class _SearchPageState extends State<SearchPage> {
                   var doc = filteredDocs.toList()[index];
                   return SneakerTile(
                     product: Product(
-                        name: doc['title'],
-                        price: doc['price'],
-                        description: doc['description'],
-                        imageUrl: doc['imageUrl'],
-                        size: doc['size'],
-                        condition: docs[index]['condition'],
-                        carouselUrls: docs[index]['imageUrls']),
+                      name: doc['title'],
+                      price: doc['price'],
+                      description: doc['description'],
+                      imageUrl: doc['imageUrl'],
+                      size: doc['size'],
+                      condition: docs[index]['condition'],
+                      carouselUrls: docs[index]['imageUrls'],
+                      category: docs[index]['category'],
+                    ),
                   );
                 }),
           );

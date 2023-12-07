@@ -37,20 +37,21 @@ class _CartPageState extends State<CartPage> {
         ),
         body: Consumer<CartModel>(
           builder: (context, cart, child) => cart.products.isEmpty
-              ? const Center(
+              ?  Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.shopping_cart_outlined,
+                        color: Colors.grey.shade600,
                         size: 80,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Text(
                         "Oops, your cart seems to be empty😪",
-                        style: TextStyle(fontSize: 17),
+                        style: TextStyle(fontSize: 17,color: Colors.grey.shade600),
                       ),
                     ],
                   ),

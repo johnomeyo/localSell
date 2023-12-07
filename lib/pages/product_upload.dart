@@ -27,28 +27,7 @@ class _UploadPageState extends State<UploadPage> {
   final sizeController = TextEditingController();
   final conditionController = TextEditingController();
   final measurementController = TextEditingController();
-  // String selectedPath = "";
-  // String imageUrl = "";
 
-  // selectImageFromGallery() async {
-  //   XFile? file = await ImagePicker()
-  //       .pickImage(source: ImageSource.gallery, imageQuality: 100);
-  //   if (file != null) {
-  //     return file.path;
-  //   } else {
-  //     return '';
-  //   }
-  // }
-
-  // selectImageFromCamera() async {
-  //   XFile? file = await ImagePicker()
-  //       .pickImage(source: ImageSource.camera, imageQuality: 100);
-  //   if (file != null) {
-  //     return file.path;
-  //   } else {
-  //     return '';
-  //   }
-  // }
   List<XFile> _imageList = [];
   final List<String> urlList = [];
 
@@ -60,17 +39,6 @@ class _UploadPageState extends State<UploadPage> {
   }
 
   uploadPost() async {
-    // if (selectedPath == '') return;
-    // String uniqueName = DateTime.now().microsecondsSinceEpoch.toString();
-    // Reference referenceRoot = FirebaseStorage.instance.ref();
-    // Reference referenceDirImages = referenceRoot.child("images");
-    // Reference imageToUpload = referenceDirImages.child(uniqueName);
-    // try {
-    //   await imageToUpload.putFile(File(selectedPath));
-    //   imageUrl = await imageToUpload.getDownloadURL();
-    // } catch (e) {
-    //   Text("An error $e occurred");
-    // }
     for (var img in _imageList) {
       var file = File(img.path);
       var fileName = DateTime.now().millisecondsSinceEpoch.toString();
@@ -89,8 +57,8 @@ class _UploadPageState extends State<UploadPage> {
       "size": sizeController.text,
       "measurement": measurementController.text,
       "imageUrls": urlList,
-      'displayPhoto':urlList[0],
-      "timestamp": DateTime.now()
+      'displayPhoto': urlList[0],
+      "timestamp": DateTime.now(),
     });
   }
 
@@ -219,7 +187,6 @@ class _UploadPageState extends State<UploadPage> {
                           sizeController.text.isNotEmpty &&
                           conditionController.text.isNotEmpty &&
                           categoryController.text.isNotEmpty &&
-                          // selectedPath.isNotEmpty &&
                           measurementController.text.isNotEmpty) {
                         uploadPost();
                         Navigator.push(
@@ -243,138 +210,3 @@ class _UploadPageState extends State<UploadPage> {
         ));
   }
 }
-/*
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Center(
-                  child: Container(
-                      height: 300,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.grey[200]),
-                      child: selectedPath == ""
-                          ? GestureDetector(
-                              onTap: () async {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) => AlertDialog(
-                                          title: Text(
-                                            "Choose an image from...!!!",
-                                            style: GoogleFonts.lato(
-                                                textStyle: const TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.w500)),
-                                          ),
-                                          content: SingleChildScrollView(
-                                            child: Row(
-                                              children: [
-                                                GestureDetector(
-                                                  onTap: () async {
-                                                    selectedPath =
-                                                        await selectImageFromGallery();
-                                                    if (selectedPath != "") {
-                                                      Navigator.pop(context);
-                                                      setState(() {});
-                                                    } else {
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                              const SnackBar(
-                                                                  content: Text(
-                                                                      "No image selected")));
-                                                    }
-                                                  },
-                                                  child: Card(
-                                                    child: Column(
-                                                      children: [
-                                                        Image.asset(
-                                                          "assets/gallery.png",
-                                                          height: 100,
-                                                          width: 100,
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  bottom: 10),
-                                                          child: Text(
-                                                            'Gallery',
-                                                            style: GoogleFonts.lato(
-                                                                textStyle: const TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500)),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                                GestureDetector(
-                                                  onTap: () async {
-                                                    await selectImageFromCamera();
-                                                    if (selectedPath != "") {
-                                                      Navigator.pop(context);
-                                                      setState(() {});
-                                                    } else {
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                              const SnackBar(
-                                                                  content: Text(
-                                                                      "No image selected")));
-                                                    }
-                                                  },
-                                                  child: Card(
-                                                    child: Column(
-                                                      children: [
-                                                        Image.asset(
-                                                          "assets/camera.png",
-                                                          height: 100,
-                                                          width: 100,
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  bottom: 10),
-                                                          child: Text(
-                                                            'Camera',
-                                                            style: GoogleFonts.lato(
-                                                                textStyle: const TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500)),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ));
-                              },
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset("assets/post.png"),
-                                  const Text("Upload image"),
-                                ],
-                              ),
-                            )
-                          : Image.file(
-                              File(selectedPath),
-                              fit: BoxFit.cover,
-                            )),
-                ),
-              ),
-
-*/

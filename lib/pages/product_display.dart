@@ -16,12 +16,6 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   final sizeController = TextEditingController();
-  List<String> imageUrls = [
-    "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1624&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?q=80&w=1898&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=1664&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1543508282-6319a3e2621f?q=80&w=1615&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +72,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       const SizedBox(
                         height: 10,
                       ),
-                      const Text("Men's shoe"),
+                      Text(widget.product.category),
                       const SizedBox(
                         height: 20,
                       ),
@@ -88,14 +82,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                       const SizedBox(
                         height: 20,
                       ),
-                      // Container(
-                      //   height: 200,
-                      //   decoration: BoxDecoration(
-                      //       borderRadius: BorderRadius.circular(10),
-                      //       image: DecorationImage(
-                      //           image: NetworkImage(widget.product.imageUrl),
-                      //           fit: BoxFit.cover)),
-                      // )
                       CarouselSlider(
                         items: widget.product.carouselUrls.map((url) {
                           return Builder(builder: (context) {
@@ -169,6 +155,52 @@ class _ProductDetailsState extends State<ProductDetails> {
                   Text(
                     widget.product.condition,
                     style: TextStyle(color: Colors.grey.shade600),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Divider(
+                color: Colors.grey.shade600,
+              ),
+              Text(
+                "Seller Details",
+                style: style3,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Text(
+                    "Username:",
+                    style: TextStyle(color: Colors.grey.shade600),
+                  ),
+                  const Spacer(),
+                  Text(
+                    "@astropphel",
+                    style: TextStyle(
+                        color: Colors.grey.shade900,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Row(
+                children: [
+                  Text(
+                    "Phone:",
+                    style: TextStyle(color: Colors.grey.shade600),
+                  ),
+                  const Spacer(),
+                  Text(
+                    "+254764982982",
+                    style: TextStyle(
+                        color: Colors.grey.shade900,
+                        fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
@@ -251,7 +283,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                     ),
                   )
                 ],
-              )
+              ),
+              const SizedBox(
+                height: 15,
+              ),
             ],
           ),
         ),

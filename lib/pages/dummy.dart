@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:local_sell/components/shimmers/sneakertile.dart';
 
 class ImagePickerExample extends StatefulWidget {
   const ImagePickerExample({super.key});
@@ -44,23 +44,24 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ElevatedButton(
-              onPressed: () async {
-                await _pickImages();
-                await uploadImages();
-              },
-              child: const Text('Pick Images'),
-            ),
-            CarouselSlider(
-              items: urlList.map((image) {
-                return Image.network(image);
-              }).toList(),
-              options: CarouselOptions(
-                height: 400.0,
-                enlargeCenterPage: true,
-                aspectRatio: 16 / 9,
-              ),
-            ),
+            // ElevatedButton(
+            //   onPressed: () async {
+            //     await _pickImages();
+            //     await uploadImages();
+            //   },
+            //   child: const Text('Pick Images'),
+            // ),
+            // CarouselSlider(
+            //   items: urlList.map((image) {
+            //     return Image.network(image);
+            //   }).toList(),
+            //   options: CarouselOptions(
+            //     height: 400.0,
+            //     enlargeCenterPage: true,
+            //     aspectRatio: 16 / 9,
+            //   ),
+            // ),
+            SneakerTileShimmer()
           ],
         ),
       ),

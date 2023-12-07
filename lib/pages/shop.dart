@@ -146,13 +146,15 @@ class Shop extends StatelessWidget {
                             mainAxisSpacing: 10),
                     itemBuilder: (context, index) => SneakerTile(
                       product: Product(
-                          name: docs[index]['title'],
-                          price: docs[index]['price'],
-                          description: docs[index]['description'],
-                          imageUrl: docs[index]['displayPhoto'],
-                          size: docs[index]['size'],
-                          condition: docs[index]['condition'],
-                          carouselUrls: docs[index]['imageUrls']),
+                        name: docs[index]['title'],
+                        price: docs[index]['price'],
+                        description: docs[index]['description'],
+                        imageUrl: docs[index]['displayPhoto'],
+                        size: docs[index]['size'],
+                        condition: docs[index]['condition'],
+                        carouselUrls: docs[index]['imageUrls'],
+                        category: docs[index]['category'],
+                      ),
                     ),
                   ));
                 }),
