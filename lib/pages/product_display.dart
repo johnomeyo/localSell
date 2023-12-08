@@ -16,7 +16,9 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   final sizeController = TextEditingController();
-
+void call(){
+//open the phone app on the user's device
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -196,11 +198,14 @@ class _ProductDetailsState extends State<ProductDetails> {
                     style: TextStyle(color: Colors.grey.shade600),
                   ),
                   const Spacer(),
-                  Text(
-                    widget.product.sellerPhone,
-                    style: TextStyle(
-                        color: Colors.grey.shade900,
-                        fontWeight: FontWeight.w500),
+                  GestureDetector(
+                    onTap: ()=>call(),
+                    child: Text(
+                      widget.product.sellerPhone,
+                      style: TextStyle(
+                          color: Colors.grey.shade900,
+                          fontWeight: FontWeight.w500),
+                    ),
                   ),
                 ],
               ),
@@ -254,7 +259,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             decoration: BoxDecoration(
                               color: Colors.black,
                               borderRadius: BorderRadius.circular(
-                                  10.0), // Set your desired corner radius
+                                  10.0), 
                             ),
                             child: const Text('Successfully added to cart')),
                         duration: const Duration(seconds: 2),
