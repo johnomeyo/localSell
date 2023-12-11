@@ -6,6 +6,7 @@ import 'package:local_sell/pages/cart_page.dart';
 import 'package:local_sell/providers/cart_provider.dart';
 import 'package:local_sell/providers/favorite_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key, required this.product});
@@ -16,9 +17,14 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   final sizeController = TextEditingController();
-void call(){
+  void call(String phoneNumber) async {
 //open the phone app on the user's device
-}
+    final call = 'tel:$phoneNumber';
+    if (await canLaunchUrl(Uri.parse(call))) {
+      await launchUrl(Uri.parse(call));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -189,7 +195,7 @@ void call(){
                 ],
               ),
               const SizedBox(
-                height: 5,
+                height: 8,
               ),
               Row(
                 children: [
@@ -199,12 +205,20 @@ void call(){
                   ),
                   const Spacer(),
                   GestureDetector(
-                    onTap: ()=>call(),
-                    child: Text(
+                    onTap: () => call(
                       widget.product.sellerPhone,
-                      style: TextStyle(
-                          color: Colors.grey.shade900,
-                          fontWeight: FontWeight.w500),
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.call, color: Colors.green, size: 20,),
+                        const SizedBox(width: 10,),
+                        Text(
+                          widget.product.sellerPhone,
+                          style: TextStyle(
+                              color: Colors.grey.shade900,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -234,7 +248,7 @@ void call(){
                             if (favoriteProvider.isFavorite(widget.product) !=
                                 true) {
                               favoriteProvider.addToFavorites(widget.product);
-                              print(favoriteProvider.favorites.length);
+                              // print(favoriteProvider.favorites.length);
                             }
                             // favoriteProvider
                             //     .removeFromFavorites(widget.product);
@@ -258,8 +272,7 @@ void call(){
                             padding: const EdgeInsets.all(16.0),
                             decoration: BoxDecoration(
                               color: Colors.black,
-                              borderRadius: BorderRadius.circular(
-                                  10.0), 
+                              borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: const Text('Successfully added to cart')),
                         duration: const Duration(seconds: 2),
