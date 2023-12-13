@@ -11,7 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_sell/components/delta.dart';
 import 'package:local_sell/components/gamma.dart';
-import 'package:local_sell/pages/shop.dart';
+import 'package:local_sell/main.dart';
 
 class UploadPage extends StatefulWidget {
   const UploadPage({super.key});
@@ -29,8 +29,9 @@ class _UploadPageState extends State<UploadPage> {
   final conditionController = TextEditingController();
   final measurementController = TextEditingController();
   final currentUser = FirebaseAuth.instance.currentUser;
+  bool isUploading = false;
   List<XFile> _imageList = [];
-  final List<String> urlList = [];
+   List<String> urlList = [];
 
   Future<void> _pickImages() async {
     List<XFile>? result = await ImagePicker().pickMultiImage();
@@ -73,16 +74,27 @@ class _UploadPageState extends State<UploadPage> {
       "sellerUsername": sellerUsername,
       "sellerPhone": sellerPhone,
     });
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const MyHomePage()));
+  }
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    descriptionController.dispose();
+    priceController.dispose();
+    categoryController.dispose();
+    categoryController.dispose();
+    sizeController.dispose();
+    conditionController.dispose();
+    measurementController.dispose();
+    super.dispose();
   }
 
   @override
   void initState() {
-    titleController.clear();
-    priceController.clear();
-    descriptionController.clear();
-    sizeController.clear();
-    measurementController.clear();
-    conditionController.clear();
+    isUploading = false;
+    urlList = [];
     super.initState();
   }
 
@@ -209,8 +221,11 @@ class _UploadPageState extends State<UploadPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: MyButtons(
-                        text: "Upload",
+                        text: isUploading ? "Uploading..." : "Upload",
                         ontap: () {
+                          setState(() {
+                            isUploading = true;
+                          });
                           if (priceController.text.isNotEmpty &&
                               titleController.text.isNotEmpty &&
                               descriptionController.text.isNotEmpty &&
@@ -223,16 +238,12 @@ class _UploadPageState extends State<UploadPage> {
                               titleController.text,
                               categoryController.text,
                               descriptionController.text,
+                              conditionController.text,
                               sizeController.text,
                               measurementController.text,
-                              conditionController.text,
                               userData['username'],
                               userData['phone'],
                             );
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const Shop()));
                           } else {
                             showDialog(
                                 context: context,
