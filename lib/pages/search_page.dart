@@ -97,7 +97,7 @@ class _SearchPageState extends State<SearchPage> {
                       name: doc['title'],
                       price: doc['price'],
                       description: doc['description'],
-                      imageUrl: doc['imageUrl'],
+                      imageUrl: doc['displayPhoto'],
                       size: doc['size'],
                       condition: docs[index]['condition'],
                       carouselUrls: docs[index]['imageUrls'],

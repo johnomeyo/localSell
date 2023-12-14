@@ -78,23 +78,17 @@ class _UploadPageState extends State<UploadPage> {
         context, MaterialPageRoute(builder: (context) => const MyHomePage()));
   }
 
-  @override
-  void dispose() {
-    titleController.dispose();
-    descriptionController.dispose();
-    priceController.dispose();
-    categoryController.dispose();
-    categoryController.dispose();
-    sizeController.dispose();
-    conditionController.dispose();
-    measurementController.dispose();
-    super.dispose();
-  }
 
   @override
   void initState() {
-    isUploading = false;
-    urlList = [];
+    titleController.clear();
+    descriptionController.clear();
+    priceController.clear();
+    categoryController.clear();
+    categoryController.clear();
+    sizeController.clear();
+    conditionController.clear();
+    measurementController.clear();
     super.initState();
   }
 
