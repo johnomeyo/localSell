@@ -248,10 +248,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                             if (favoriteProvider.isFavorite(widget.product) !=
                                 true) {
                               favoriteProvider.addToFavorites(widget.product);
-                              // print(favoriteProvider.favorites.length);
                             }
-                            // favoriteProvider
-                            //     .removeFromFavorites(widget.product);
+                            
                           },
                           icon: favoriteProvider.isFavorite(widget.product)
                               ? const Icon(

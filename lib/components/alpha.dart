@@ -26,8 +26,12 @@ class SneakerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(context,
-          MaterialPageRoute(builder: (context) =>  ProductDetails(product: product,))),
+      onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ProductDetails(
+                    product: product,
+                  ))),
       child: SizedBox(
         height: 200,
         child: Column(
@@ -38,11 +42,8 @@ class SneakerTile extends StatelessWidget {
                 height: 150,
                 decoration: BoxDecoration(
                     color: containerBackground,
-                    // border: Border.all(color: Colors.black12),
-                    // color: Colors.amber,
-                    image:  DecorationImage(
-                        image: NetworkImage(
-                           product.imageUrl),
+                    image: DecorationImage(
+                        image: NetworkImage(product.imageUrl),
                         fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(10)),
               ),
@@ -50,16 +51,17 @@ class SneakerTile extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-             Text(
+            Text(
               product.name,
               style: const TextStyle(fontWeight: FontWeight.w500),
             ),
             const SizedBox(
               height: 5,
             ),
-             Text(
+            Text(
               product.price,
-              style: const TextStyle(color: Colors.red, fontWeight: FontWeight.w600),
+              style: const TextStyle(
+                  color: Colors.red, fontWeight: FontWeight.w600),
             ),
           ],
         ),
