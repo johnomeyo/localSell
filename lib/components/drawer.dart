@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:local_sell/components/alpha.dart';
 import 'package:local_sell/components/constants.dart';
 import 'package:local_sell/pages/cart_page.dart';
+import 'package:local_sell/pages/dummy.dart';
 import 'package:local_sell/pages/favorites_page.dart';
 import 'package:local_sell/pages/profile.dart';
-import 'package:local_sell/pages/search_page.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -59,7 +59,7 @@ class MyDrawer extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 20),
             child: DrawerTiles(
                 onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const SearchPage())),
+                    MaterialPageRoute(builder: (context) => const Dummy())),
                 child: const Text(
                   'E X I T',
                   style: TextStyle(color: Colors.black),

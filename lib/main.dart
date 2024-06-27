@@ -11,6 +11,7 @@ import 'package:local_sell/pages/product_upload.dart';
 import 'package:local_sell/pages/profile.dart';
 import 'package:local_sell/pages/shop.dart';
 import 'package:local_sell/providers/cart_provider.dart';
+import 'package:local_sell/providers/data_fetching.dart';
 import 'package:local_sell/providers/favorite_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,7 @@ void main() async {
   );
   runApp(
     MultiProvider(providers: [
+      ChangeNotifierProvider(create: (context) => ProductProvider()),
       ChangeNotifierProvider<CartModel>(create: (context) => CartModel()),
       ChangeNotifierProvider<FavoriteProvider>(
           create: (context) => FavoriteProvider()),
